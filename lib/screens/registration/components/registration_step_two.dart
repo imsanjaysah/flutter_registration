@@ -54,15 +54,22 @@ class _RegistrationStepTwoState extends State<RegistrationStepTwo> {
         style: captionStyle,
       );
 
-  Widget get _password => CustomTextField(
-        hintText: 'Create Password',
-        obscureText: true,
-        suffixIcon: Icons.remove_red_eye,
-        onChanged: (String password) {
-          Provider.of<RegistrationController>(context, listen: false)
-              .setPassword(password);
-        },
-      );
+  Widget get _password => Selector(
+    selector: (_, RegistrationController controller) => controller.showPassword,
+    builder: (context, showPassword, child) => CustomTextField(
+      hintText: 'Create Password',
+      obscureText: !showPassword,
+      suffixIcon: Icons.remove_red_eye,
+      onChanged: (String password) {
+        Provider.of<RegistrationController>(context, listen: false)
+            .setPassword(password);
+      },
+      onSuffixIconClicked: () {
+        Provider.of<RegistrationController>(context, listen: false)
+            .toggleShowPassword();
+      },
+    ),
+  );
 
   Widget get _complexityRow => Row(
         children: [

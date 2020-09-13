@@ -18,6 +18,9 @@ class RegistrationController extends ChangeNotifier {
 
   String get password => _password;
 
+  bool _showPassword = false;
+  bool get showPassword => _showPassword;
+
   PasswordComplexity _passwordComplexity;
 
   PasswordComplexity get passwordComplexity => _passwordComplexity;
@@ -79,6 +82,11 @@ class RegistrationController extends ChangeNotifier {
 
   void setFormValid(bool status) {
     _isFormValid = status;
+    notifyListeners();
+  }
+
+  void toggleShowPassword() {
+    _showPassword = !showPassword;
     notifyListeners();
   }
 

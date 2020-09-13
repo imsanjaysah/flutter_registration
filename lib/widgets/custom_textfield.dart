@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {Key key, this.hintText, this.prefixIcon, this.suffixIcon, this.onChanged, this.obscureText})
+      {Key key,
+      this.hintText,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.onChanged,
+      this.obscureText, this.onSuffixIconClicked})
       : super(key: key);
 
   final String hintText;
@@ -11,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final IconData suffixIcon;
   final bool obscureText;
   final Function(String) onChanged;
+  final VoidCallback onSuffixIconClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,14 @@ class CustomTextField extends StatelessWidget {
             borderSide: BorderSide(color: Colors.grey),
           ),
           prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-          suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null),
+          suffixIcon: suffixIcon != null
+              ? IconButton(
+                  icon: Icon(suffixIcon),
+                  onPressed: () {
+                    onSuffixIconClicked();
+                  },
+                )
+              : null),
       onChanged: onChanged,
     );
   }
