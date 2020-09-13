@@ -1,5 +1,5 @@
 name: flutter_registration
-description: A new Flutter application.
+description: Sample demo application to display registration process. This project uses Provider for state management.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
