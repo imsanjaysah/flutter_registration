@@ -39,10 +39,7 @@ class _RegistrationStepTwoState extends State<RegistrationStepTwo> {
 
   Widget get _title => Text(
         'Create Password',
-        style: TextStyle(
-            fontSize: getProportionateScreenWidth(16),
-            fontWeight: FontWeight.bold,
-            color: Colors.white),
+        style: bodyStyle,
       );
 
   Widget get _desc => Text(

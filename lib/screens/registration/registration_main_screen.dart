@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_one.dart';
+import 'package:flutter_registration/screens/registration/components/registration_step_three.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_two.dart';
 import 'package:flutter_registration/screens/registration/components/registration_steps.dart';
 import 'package:flutter_registration/widgets/default_button.dart';
@@ -44,6 +45,8 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
         return RegistrationStepOne();
       case 2:
         return RegistrationStepTwo();
+      case 3:
+        return RegistrationStepThree();
       default:
         return Container();
     }
