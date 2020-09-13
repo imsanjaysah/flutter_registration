@@ -11,10 +11,37 @@ class RegistrationStepFour extends StatefulWidget {
   State<StatefulWidget> createState() => _RegistrationStepFourState();
 }
 
-class _RegistrationStepFourState extends State<RegistrationStepFour> {
+class _RegistrationStepFourState extends State<RegistrationStepFour> with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
+  Animation<double> _scaleAnimation;
   @override
   void initState() {
     super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000), lowerBound: 0.5, upperBound: 0.8
+    );
+    _scaleAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.bounceInOut,
+    );
+    //_animationController.forward();
+    initAnimation(_animationController, _scaleAnimation);
+  }
+
+  void initAnimation(
+      AnimationController controller, Animation<double> animation) {
+    animation.addStatusListener((AnimationStatus status) {
+      Future<void>(() {
+        if (status == AnimationStatus.completed) {
+          controller?.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          controller?.forward();
+        }
+      });
+    });
+    controller?.forward();
   }
 
   @override
@@ -23,6 +50,10 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
   Widget get _body => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          _clockAnimation,
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
           _title,
           SizedBox(
             height: getProportionateScreenHeight(20),
@@ -38,6 +69,19 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
           _time,
         ],
       );
+
+  Widget get _clockAnimation => CircleAvatar(
+    backgroundColor: Colors.white70,
+    radius: 32,
+    child: ScaleTransition(
+      scale: _scaleAnimation,
+      child: CircleAvatar(
+        radius: 32,
+        backgroundColor: Colors.white,
+        child: Icon(Icons.calendar_today, color: kPrimaryColor,),
+      ),
+    ),
+  );
 
   Widget get _title => Text(
         'Schedule Video Call',
@@ -129,5 +173,11 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
               .scheduleTime = TimeOfDay.fromDateTime(date);
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 }

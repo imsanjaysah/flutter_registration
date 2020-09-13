@@ -93,7 +93,7 @@ class RegistrationController extends ChangeNotifier {
     if (passwordHasDigitValidatorRegExp.hasMatch(_password)) {
       passwordStrengthScore += 2;
     }
-    if (password.length >= 2) {
+    if (password.length >= 9) {
       passwordStrengthScore += 2;
     }
 
