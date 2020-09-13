@@ -1,16 +1,16 @@
 # flutter_registration
 
-A new Flutter application.
+<img src="1.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="2.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="3.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="4.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="5.jpg" style="float: left; margin-left: 10px;" width="200"/> <img src="6.jpg" style="float: left; margin-left: 10px;" width="200"/></br>Sample demo application to display registration process. This project uses Provider for state management.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+##### Getting Started
+### Highlights
+  + Flutter
+  + Provider 
 
-A few resources to get you started if this is your first Flutter project:
+### Pre-requisites
+  + Android Studio v4.0.1
+  + Flutter 1.20.2
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Demo App
+To run the project, clone the repository and run it via Android Studio.
