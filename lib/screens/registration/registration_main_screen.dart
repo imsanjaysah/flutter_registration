@@ -17,7 +17,7 @@ class RegistrationMainScreen extends StatefulWidget {
 }
 
 class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
-  int _currentStep = 1;
+  int _stepsCompleted = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
     child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            RegistrationSteps(_currentStep),
+            RegistrationSteps(_stepsCompleted),
             _currentRegistrationStepPage,
             _nextButton
           ],
@@ -41,14 +41,14 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
   );
 
   Widget get _currentRegistrationStepPage {
-    switch (_currentStep) {
-      case 1:
+    switch (_stepsCompleted) {
+      case 0:
         return RegistrationStepOne();
-      case 2:
+      case 1:
         return RegistrationStepTwo();
-      case 3:
+      case 2:
         return RegistrationStepThree();
-      case 4:
+      case 3:
         return RegistrationStepFour();
       default:
         return Container();
@@ -58,9 +58,9 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
   Widget get _nextButton => DefaultButton(
     text: 'NEXT',
     press: () {
-      if (_currentStep < 4) {
+      if (_stepsCompleted < 4) {
         setState(() {
-          ++_currentStep;
+          ++_stepsCompleted;
         });
       }
     },

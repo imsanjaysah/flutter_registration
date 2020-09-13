@@ -24,7 +24,7 @@ class StepProgressView extends StatelessWidget {
         _activeColor = activeColor,
         _inactiveColor = inactiveColor,
         _stepStyle = stepsStyle,
-        assert(curStep > 0 == true && curStep <= stepsText.length),
+        assert(curStep > -1 == true && curStep <= stepsText.length),
         assert(width > 0),
         assert(height >= 2 * dotRadius),
         assert(width >= dotRadius * 2 * stepsText.length),
@@ -70,7 +70,7 @@ class StepProgressView extends StatelessWidget {
     var wids = <Widget>[];
     _stepsText.asMap().forEach((i, text) {
       var circleColor =
-          (i == 0 || _curStep > i + 1) ? _activeColor : _inactiveColor;
+          (_curStep > i) ? _activeColor : _inactiveColor;
 
       var lineColor = _curStep > i + 1 ? _activeColor : borderColor;
 
