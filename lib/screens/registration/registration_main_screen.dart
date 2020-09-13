@@ -66,12 +66,18 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
     selector: (_, RegistrationController controller) => controller.isFormValid,
     builder: (_, value, child) => DefaultButton(
       isEnabled: value,
-      text: 'NEXT',
+      text: _stepsCompleted < 4 ? 'NEXT' : 'DONE',
       press: () {
         if (_stepsCompleted < 4) {
           setState(() {
             ++_stepsCompleted;
-            Provider.of<RegistrationController>(context, listen: false).setFormValid(false);
+            if (_stepsCompleted != 4) {
+              Provider.of<RegistrationController>(context, listen: false).setFormValid(false);
+            }
+          });
+        } else {
+          setState(() {
+            _stepsCompleted = 0;
           });
         }
       },
