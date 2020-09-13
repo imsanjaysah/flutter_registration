@@ -28,3 +28,8 @@ bool get isAndroid => Platform.isAndroid == true;
 
 final RegExp emailValidatorRegExp =
 RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+final RegExp passwordHasDigitValidatorRegExp = RegExp("(?=.*[0-9]).*");
+final RegExp passwordHasLowerCaseLetterValidatorRegExp = RegExp("(?=.*[a-z]).*");
+final RegExp passwordHasUpperCaseLetterValidatorRegExp = RegExp("(?=.*[A-Z]).*");
+

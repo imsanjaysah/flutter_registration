@@ -17,10 +17,10 @@ class PasswordValidatorControl extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _passwordControl('a', 'Lowercase', true),
-        _passwordControl('A', 'Uppercase', false),
-        _passwordControl('123', 'Number', false),
-        _passwordControl('9+', 'Characters', true),
+        _passwordControl('a', 'Lowercase', passwordHasLowerCaseLetterValidatorRegExp.hasMatch(password)),
+        _passwordControl('A', 'Uppercase', passwordHasUpperCaseLetterValidatorRegExp.hasMatch(password)),
+        _passwordControl('123', 'Number', passwordHasDigitValidatorRegExp.hasMatch(password)),
+        _passwordControl('9+', 'Characters', password.length >= 9),
       ],
     );
   }
@@ -28,7 +28,7 @@ class PasswordValidatorControl extends StatelessWidget {
   Widget _passwordControl(String title, String desc, bool isDone) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          isDone
+          !isDone
               ? Text(
                   title,
                   style: headingStyle,

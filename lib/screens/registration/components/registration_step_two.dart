@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
+import 'package:flutter_registration/screens/registration/registration_controller.dart';
 import 'package:flutter_registration/widgets/custom_textfield.dart';
 import 'package:flutter_registration/widgets/password_validator_control.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationStepTwo extends StatefulWidget {
   @override
@@ -33,7 +35,12 @@ class _RegistrationStepTwoState extends State<RegistrationStepTwo> {
           SizedBox(
             height: getProportionateScreenHeight(40),
           ),
-          PasswordValidatorControl(''),
+          Selector(
+            selector: (_, RegistrationController controller) =>
+                controller.password,
+            builder: (context, password, child) =>
+                PasswordValidatorControl(password ?? ''),
+          )
         ],
       );
 
@@ -43,13 +50,17 @@ class _RegistrationStepTwoState extends State<RegistrationStepTwo> {
       );
 
   Widget get _desc => Text(
-        'Password will be used to be to account',
+        'Password will be used to login to account',
         style: captionStyle,
       );
 
   Widget get _password => CustomTextField(
         hintText: 'Create Password',
         suffixIcon: Icons.remove_red_eye,
+        onChanged: (String password) {
+          Provider.of<RegistrationController>(context, listen: false)
+              .setPassword(password);
+        },
       );
 
   Widget get _complexityRow => Row(
@@ -61,9 +72,16 @@ class _RegistrationStepTwoState extends State<RegistrationStepTwo> {
           SizedBox(
             width: getProportionateScreenWidth(5),
           ),
-          Text(
-            'Very Weak',
-            style: captionStyle)
+          Selector(
+            selector: (_, RegistrationController controller) =>
+                controller.passwordComplexity,
+            builder: (context, PasswordComplexity complexity, child) => Text(
+                complexity != null ? complexity.complexity : '',
+                style: captionStyle.apply(
+                    color: complexity != null
+                        ? complexity.color
+                        : Colors.transparent)),
+          )
         ],
       );
 }
