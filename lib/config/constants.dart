@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/size_config.dart';
 
 const kPrimaryColor = Colors.blue;
-const kPrimaryLightColor = Color(0x992196F3);
+const kPrimaryLightColor = Color(0x662196F3);
 const kBackgroundColor = Colors.indigo;
 
 

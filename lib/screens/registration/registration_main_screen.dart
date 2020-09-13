@@ -7,7 +7,9 @@ import 'package:flutter_registration/screens/registration/components/registratio
 import 'package:flutter_registration/screens/registration/components/registration_step_three.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_two.dart';
 import 'package:flutter_registration/screens/registration/components/registration_steps.dart';
+import 'package:flutter_registration/screens/registration/registration_controller.dart';
 import 'package:flutter_registration/widgets/default_button.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationMainScreen extends StatefulWidget {
   static String routeName = "/registration";
@@ -55,14 +57,18 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
     }
   }
 
-  Widget get _nextButton => DefaultButton(
-    text: 'NEXT',
-    press: () {
-      if (_stepsCompleted < 4) {
-        setState(() {
-          ++_stepsCompleted;
-        });
-      }
-    },
+  Widget get _nextButton => Selector(
+    selector: (_, RegistrationController controller) => controller.isFormValid,
+    builder: (_, value, child) => DefaultButton(
+      isEnabled: value,
+      text: 'NEXT',
+      press: () {
+        if (_stepsCompleted < 4) {
+          setState(() {
+            ++_stepsCompleted;
+          });
+        }
+      },
+    ),
   );
 }

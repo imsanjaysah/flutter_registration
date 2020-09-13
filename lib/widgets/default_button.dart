@@ -6,9 +6,10 @@ class DefaultButton extends StatelessWidget {
   const DefaultButton({
     Key key,
     this.text,
-    this.press,
+    this.press, this.isEnabled,
   }) : super(key: key);
   final String text;
+  final bool isEnabled;
   final Function press;
 
   @override
@@ -19,12 +20,13 @@ class DefaultButton extends StatelessWidget {
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         color: kPrimaryColor,
-        onPressed: press,
+        disabledColor: kPrimaryLightColor,
+        onPressed: isEnabled ? press : null,
         child: Text(
           text,
           style: TextStyle(
             fontSize: getProportionateScreenWidth(18),
-            color: Colors.white,
+            color: isEnabled ? Colors.white : Colors.white70,
           ),
         ),
       ),
