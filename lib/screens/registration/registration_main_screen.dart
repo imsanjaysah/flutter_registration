@@ -26,7 +26,7 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
   }
 
   Widget get _body => Container(
-    margin: EdgeInsets.all(16),
+    margin: EdgeInsets.only(left: 16, top: 56, right: 16, bottom: 56),
     child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
