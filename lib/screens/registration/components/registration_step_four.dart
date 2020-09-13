@@ -51,26 +51,30 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
       );
 
   Widget get _date => DropDownMenu(
-    isEnabled: false,
+        isEnabled: false,
         label: 'Date',
-        menuItems: pickedDate == null ? [
-          '-Choose Date-',
-        ] : [
-          pickedDate.toString(),
-        ],
+        menuItems: pickedDate == null
+            ? [
+                '-Choose Date-',
+              ]
+            : [
+                pickedDate.toString(),
+              ],
         onTap: () {
           isAndroid ? _androidPickDate() : _iOSPickDate();
         },
       );
 
   Widget get _time => DropDownMenu(
-    isEnabled: false,
+        isEnabled: false,
         label: 'Time',
-        menuItems: time == null ? [
-          '-Choose Time-',
-        ] : [
-  time.toString(),
-  ],
+        menuItems: time == null
+            ? [
+                '-Choose Time-',
+              ]
+            : [
+                time.toString(),
+              ],
         onTap: () {
           isAndroid ? _androidPickTime() : _iOSPickTime();
         },
@@ -90,7 +94,8 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
   }
 
   _androidPickTime() async {
-    TimeOfDay t = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    TimeOfDay t =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
     if (t != null)
       setState(() {
         time = t;
@@ -108,7 +113,6 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
           });
       },
     );
-
   }
 
   _iOSPickTime() async {
