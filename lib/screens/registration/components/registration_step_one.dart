@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
+import 'package:flutter_registration/screens/registration/registration_controller.dart';
 import 'package:flutter_registration/widgets/custom_textfield.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationStepOne extends StatefulWidget {
   @override
@@ -58,5 +61,10 @@ class _RegistrationStepOneState extends State<RegistrationStepOne> {
       CustomTextField(
         hintText: 'Email',
         prefixIcon: Icons.email,
+        onChanged: (String email) {
+          if (emailValidatorRegExp.hasMatch(email)) {
+            Provider.of<RegistrationController>(context, listen: false).setFormValid();
+          }
+        },
       );
 }

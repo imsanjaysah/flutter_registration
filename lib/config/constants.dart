@@ -25,3 +25,6 @@ final captionStyle = TextStyle(fontSize: getProportionateScreenWidth(12),
     color: Colors.white);
 
 bool get isAndroid => Platform.isAndroid == true;
+
+final RegExp emailValidatorRegExp =
+RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");

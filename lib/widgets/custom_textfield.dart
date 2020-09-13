@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {Key key, this.hintText, this.prefixIcon, this.suffixIcon})
+      {Key key, this.hintText, this.prefixIcon, this.suffixIcon, this.onChanged})
       : super(key: key);
 
   final String hintText;
   final IconData prefixIcon;
   final IconData suffixIcon;
+  final Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
           ),
           prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
           suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null),
+      onChanged: onChanged,
     );
   }
 }
