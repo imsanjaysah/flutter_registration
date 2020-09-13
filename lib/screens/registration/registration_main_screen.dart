@@ -7,6 +7,7 @@ import 'package:flutter_registration/screens/registration/components/registratio
 import 'package:flutter_registration/screens/registration/components/registration_step_three.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_two.dart';
 import 'package:flutter_registration/screens/registration/components/registration_steps.dart';
+import 'package:flutter_registration/screens/registration/components/registration_success.dart';
 import 'package:flutter_registration/screens/registration/registration_controller.dart';
 import 'package:flutter_registration/widgets/default_button.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,7 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
       case 3:
         return RegistrationStepFour();
       default:
-        return Container();
+        return RegistrationSuccess();
     }
   }
 
