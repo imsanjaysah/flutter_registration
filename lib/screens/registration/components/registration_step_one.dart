@@ -63,7 +63,7 @@ class _RegistrationStepOneState extends State<RegistrationStepOne> {
         prefixIcon: Icons.email,
         onChanged: (String email) {
           if (emailValidatorRegExp.hasMatch(email)) {
-            Provider.of<RegistrationController>(context, listen: false).setFormValid();
+            Provider.of<RegistrationController>(context, listen: false).setFormValid(true);
           }
         },
       );
