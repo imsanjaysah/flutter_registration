@@ -70,6 +70,7 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
         if (_stepsCompleted < 4) {
           setState(() {
             ++_stepsCompleted;
+            Provider.of<RegistrationController>(context, listen: false).setFormValid(false);
           });
         }
       },
