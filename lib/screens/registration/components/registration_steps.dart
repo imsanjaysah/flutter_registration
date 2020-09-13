@@ -5,6 +5,8 @@ import 'package:flutter_registration/config/size_config.dart';
 import 'package:flutter_registration/widgets/step_progress_view.dart';
 
 class RegistrationSteps extends StatelessWidget {
+  RegistrationSteps(this._curPage, {Key key}) : super(key: key);
+
   final _stepsText = ['1','2','3','4'];
 
   final _stepCircleRadius = 30.0;
@@ -17,7 +19,8 @@ class RegistrationSteps extends StatelessWidget {
 
   TextStyle _stepStyle = TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.black);
 
-  int _curPage = 1;
+  final int _curPage;
+
   @override
   Widget build(BuildContext context) {
     return StepProgressView(

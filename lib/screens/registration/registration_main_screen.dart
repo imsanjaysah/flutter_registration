@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_one.dart';
+import 'package:flutter_registration/screens/registration/components/registration_step_two.dart';
 import 'package:flutter_registration/screens/registration/components/registration_steps.dart';
 import 'package:flutter_registration/widgets/default_button.dart';
 
@@ -30,7 +31,7 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
     child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            RegistrationSteps(),
+            RegistrationSteps(_currentStep),
             _currentRegistrationStepPage,
             _nextButton
           ],
@@ -41,6 +42,8 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
     switch (_currentStep) {
       case 1:
         return RegistrationStepOne();
+      case 2:
+        return RegistrationStepTwo();
       default:
         return Container();
     }
@@ -49,6 +52,9 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
   Widget get _nextButton => DefaultButton(
     text: 'NEXT',
     press: () {
+      setState(() {
+        ++_currentStep;
+      });
     },
   );
 }

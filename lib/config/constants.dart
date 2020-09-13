@@ -11,9 +11,9 @@ const kDefaultRegistrationStepColor = Colors.white;
 const kTextColor = Color(0xFF757575);
 
 
-final headingStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(20),
-  fontWeight: FontWeight.bold,
-  color: Colors.black,
-  height: 1.5,
-);
+final headingStyle =TextStyle(fontSize: 24.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.white);
+
+final captionStyle = TextStyle(fontSize: getProportionateScreenWidth(12),
+    color: Colors.white);
