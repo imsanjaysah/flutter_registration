@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
 import 'package:flutter_registration/widgets/drop_down_menu.dart';
+import 'package:provider/provider.dart';
+
+import '../registration_controller.dart';
 
 class RegistrationStepThree extends StatefulWidget {
   @override
@@ -58,7 +61,8 @@ class _RegistrationStepThreeState extends State<RegistrationStepThree> {
           'Short term goal'
         ],
         onItemSelected: (String option) {
-
+          Provider.of<RegistrationController>(context, listen: false)
+              .setActivationOption = option;
         },
       );
 
@@ -74,7 +78,8 @@ class _RegistrationStepThreeState extends State<RegistrationStepThree> {
 
         ],
         onItemSelected: (String option) {
-
+          Provider.of<RegistrationController>(context, listen: false)
+              .setMonthlyIncome = option;
         },
       );
 
@@ -88,7 +93,8 @@ class _RegistrationStepThreeState extends State<RegistrationStepThree> {
           '35,000 - 50,000'
         ],
         onItemSelected: (String option) {
-
+          Provider.of<RegistrationController>(context, listen: false)
+              .setMonthlyExpense = option;
         },
       );
 }
