@@ -29,7 +29,7 @@ class RegistrationSteps extends StatelessWidget {
       _activeColor,
       _inactiveColor,
       _stepStyle,
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: Colors.transparent),
       padding: EdgeInsets.only(
         top: 48.0,
         left: 24.0,
