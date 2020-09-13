@@ -4,7 +4,7 @@ import 'package:flutter_registration/config/size_config.dart';
 
 class DropDownMenu extends StatefulWidget {
   DropDownMenu(
-      {this.label, this.menuItems, this.selectedItem, this.onItemSelected, this.isEnabled = true}) {
+      {this.label, this.menuItems, this.selectedItem, this.onItemSelected, this.isEnabled = true, this.onTap}) {
     /* if (selectedItem != null) {
       debugPrint('Current selected item name $selectedItem');
       //onItemSelected(selectedItem);
@@ -16,6 +16,7 @@ class DropDownMenu extends StatefulWidget {
   final List<String> menuItems;
   final bool isEnabled;
   final Function(String selectedItem) onItemSelected;
+  final Function onTap;
 
   @override
   State<StatefulWidget> createState() => _DropDownMenuState();
@@ -40,8 +41,10 @@ class _DropDownMenuState extends State<DropDownMenu> {
       _currentSelectionValue =
           widget.menuItems.indexOf(widget.selectedItem).toString();
     }
-    //Send by default first item is selected event
-    widget.onItemSelected(menuItems[int.parse(_currentSelectionValue)]);
+    if (widget.onItemSelected != null) {
+      //Send by default first item is selected event
+      widget.onItemSelected(menuItems[int.parse(_currentSelectionValue)]);
+    }
     debugPrint('Selected item is default $_currentSelectionValue');
 
     return SizedBox(
@@ -59,8 +62,10 @@ class _DropDownMenuState extends State<DropDownMenu> {
               _currentSelectionValue = value;
               widget.selectedItem =
               menuItems[int.parse(_currentSelectionValue)];
-              widget
-                  .onItemSelected(menuItems[int.parse(_currentSelectionValue)]);
+              if (widget.onItemSelected != null) {
+                widget
+                    .onItemSelected(menuItems[int.parse(_currentSelectionValue)]);
+              }
               debugPrint('Selected item is $_currentSelectionValue');
             });
           },
@@ -75,18 +80,23 @@ class _DropDownMenuState extends State<DropDownMenu> {
     style: Theme.of(context).textTheme.caption.apply(color: Colors.grey),
   );
 
-  Widget _buildWidget() => Container(
-    padding: const EdgeInsets.all(4),
-    decoration: BoxDecoration(
-      color: Colors.white,
-        border: Border.all(color: Colors.white),
-        borderRadius: const BorderRadius.all(Radius.circular(4))),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _buildLabel(),
-        _buildDropDownWidget(widget.menuItems)
-      ],
+  Widget _buildWidget() => InkWell(
+    onTap: () {
+      widget.onTap();
+    },
+    child: Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: Colors.white,
+          border: Border.all(color: Colors.white),
+          borderRadius: const BorderRadius.all(Radius.circular(4))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildLabel(),
+          _buildDropDownWidget(widget.menuItems)
+        ],
+      ),
     ),
   );
 

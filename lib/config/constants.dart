@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/size_config.dart';
 
@@ -21,3 +23,5 @@ final bodyStyle = TextStyle(fontSize: getProportionateScreenWidth(16),
 
 final captionStyle = TextStyle(fontSize: getProportionateScreenWidth(12),
     color: Colors.white);
+
+bool get isAndroid => Platform.isAndroid == true;

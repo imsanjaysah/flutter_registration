@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
+import 'package:flutter_registration/screens/registration/components/registration_step_four.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_one.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_three.dart';
 import 'package:flutter_registration/screens/registration/components/registration_step_two.dart';
@@ -47,6 +48,8 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
         return RegistrationStepTwo();
       case 3:
         return RegistrationStepThree();
+      case 4:
+        return RegistrationStepFour();
       default:
         return Container();
     }
