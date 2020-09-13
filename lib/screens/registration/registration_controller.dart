@@ -49,13 +49,27 @@ class RegistrationController extends ChangeNotifier {
     _validatePersonalInfo();
   }
 
-  String _scheduleDate;
+  DateTime _scheduleDate;
 
-  String get scheduleDate => _scheduleDate;
+  DateTime get scheduleDate => _scheduleDate;
+  set scheduleDate(DateTime dateTime) {
+    if (!isPreviousDate(dateTime)) {
+      _scheduleDate = dateTime;
+      notifyListeners();
+    }
+    _validateScheduleDateTime();
+  }
 
-  String _scheduleTime;
+  TimeOfDay _scheduleTime;
 
-  String get scheduleTime => _scheduleTime;
+  TimeOfDay get scheduleTime => _scheduleTime;
+  set scheduleTime(TimeOfDay time) {
+    if(!isPreviousTime(time)) {
+      _scheduleTime = time;
+      notifyListeners();
+    }
+    _validateScheduleDateTime();
+  }
 
   void setPassword(String password) {
     _password = password;
@@ -122,5 +136,12 @@ class RegistrationController extends ChangeNotifier {
       _isFormValid = false;
     }
     notifyListeners();
+  }
+
+  void _validateScheduleDateTime() {
+    if (_scheduleDate != null && _scheduleTime != null) {
+      _isFormValid = true;
+      notifyListeners();
+    }
   }
 }

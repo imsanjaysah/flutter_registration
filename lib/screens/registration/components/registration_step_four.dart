@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_registration/config/constants.dart';
 import 'package:flutter_registration/config/size_config.dart';
+import 'package:flutter_registration/screens/registration/registration_controller.dart';
 import 'package:flutter_registration/widgets/drop_down_menu.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationStepFour extends StatefulWidget {
   @override
@@ -10,9 +12,6 @@ class RegistrationStepFour extends StatefulWidget {
 }
 
 class _RegistrationStepFourState extends State<RegistrationStepFour> {
-  DateTime pickedDate;
-  TimeOfDay time;
-
   @override
   void initState() {
     super.initState();
@@ -50,67 +49,72 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
         style: captionStyle,
       );
 
-  Widget get _date => DropDownMenu(
-        isEnabled: false,
-        label: 'Date',
-        menuItems: pickedDate == null
-            ? [
-                '-Choose Date-',
-              ]
-            : [
-                pickedDate.toString(),
-              ],
-        onTap: () {
-          isAndroid ? _androidPickDate() : _iOSPickDate();
-        },
+  Widget get _date => Selector(
+        selector: (_, RegistrationController controller) =>
+            controller.scheduleDate,
+        builder: (context, date, child) => DropDownMenu(
+          isEnabled: false,
+          label: 'Date',
+          menuItems: date == null
+              ? [
+                  '-Choose Date-',
+                ]
+              : [
+                  dateFormat(date),
+                ],
+          onTap: () {
+            isAndroid ? _androidPickDate() : _iOSPickDate();
+          },
+        ),
       );
 
-  Widget get _time => DropDownMenu(
-        isEnabled: false,
-        label: 'Time',
-        menuItems: time == null
-            ? [
-                '-Choose Time-',
-              ]
-            : [
-                time.toString(),
-              ],
-        onTap: () {
-          isAndroid ? _androidPickTime() : _iOSPickTime();
-        },
+  Widget get _time => Selector(
+        selector: (_, RegistrationController controller) =>
+            controller.scheduleTime,
+        builder: (context, time, child) => DropDownMenu(
+          isEnabled: false,
+          label: 'Time',
+          menuItems: time == null
+              ? [
+                  '-Choose Time-',
+                ]
+              : [
+                  timeFormat(time),
+                ],
+          onTap: () {
+            isAndroid ? _androidPickTime() : _iOSPickTime();
+          },
+        ),
       );
 
   _androidPickDate() async {
     DateTime date = await showDatePicker(
       context: context,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
+      firstDate: DateTime(DateTime.now().year),
+      lastDate: DateTime(DateTime.now().year + 1),
       initialDate: DateTime.now(),
     );
     if (date != null)
-      setState(() {
-        pickedDate = date;
-      });
+      Provider.of<RegistrationController>(context, listen: false).scheduleDate =
+          date;
   }
 
   _androidPickTime() async {
-    TimeOfDay t =
+    TimeOfDay time =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (t != null)
-      setState(() {
-        time = t;
-      });
+    if (time != null)
+      Provider.of<RegistrationController>(context, listen: false).scheduleTime =
+          time;
   }
 
   _iOSPickDate() async {
     CupertinoDatePicker(
       mode: CupertinoDatePickerMode.date,
-      initialDateTime: DateTime(DateTime.now().year - 5),
+      initialDateTime: DateTime(DateTime.now().year),
       onDateTimeChanged: (DateTime date) {
         if (date != null)
-          setState(() {
-            pickedDate = date;
-          });
+          Provider.of<RegistrationController>(context, listen: false)
+              .scheduleDate = date;
       },
     );
   }
@@ -121,9 +125,8 @@ class _RegistrationStepFourState extends State<RegistrationStepFour> {
       initialDateTime: DateTime.now(),
       onDateTimeChanged: (DateTime date) {
         if (date != null)
-          setState(() {
-            time = TimeOfDay.fromDateTime(date);
-          });
+          Provider.of<RegistrationController>(context, listen: false)
+              .scheduleTime = TimeOfDay.fromDateTime(date);
       },
     );
   }
