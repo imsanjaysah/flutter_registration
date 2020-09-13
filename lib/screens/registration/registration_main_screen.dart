@@ -30,16 +30,20 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
     );
   }
 
-  Widget get _body => Container(
-    margin: EdgeInsets.only(left: 16, top: 56, right: 16, bottom: 56),
-    child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            RegistrationSteps(_stepsCompleted),
-            _currentRegistrationStepPage,
-            _nextButton
-          ],
-        ),
+  Widget get _body => SingleChildScrollView(
+    child: Container(
+      margin: EdgeInsets.only(left: 16, top: 56, right: 16, bottom: 56),
+      child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RegistrationSteps(_stepsCompleted),
+              SizedBox(height: SizeConfig.screenHeight * 0.08),
+              _currentRegistrationStepPage,
+              SizedBox(height: SizeConfig.screenHeight * 0.08),
+              _nextButton
+            ],
+          ),
+    ),
   );
 
   Widget get _currentRegistrationStepPage {
