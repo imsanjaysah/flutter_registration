@@ -56,6 +56,7 @@ class _RegistrationStepTwoState extends State<RegistrationStepTwo> {
 
   Widget get _password => CustomTextField(
         hintText: 'Create Password',
+        obscureText: true,
         suffixIcon: Icons.remove_red_eye,
         onChanged: (String password) {
           Provider.of<RegistrationController>(context, listen: false)
