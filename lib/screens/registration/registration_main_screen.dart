@@ -58,9 +58,11 @@ class _RegistrationMainScreenState extends State<RegistrationMainScreen> {
   Widget get _nextButton => DefaultButton(
     text: 'NEXT',
     press: () {
-      setState(() {
-        ++_currentStep;
-      });
+      if (_currentStep < 4) {
+        setState(() {
+          ++_currentStep;
+        });
+      }
     },
   );
 }
